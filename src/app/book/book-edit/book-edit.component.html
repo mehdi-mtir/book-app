@@ -1,0 +1,36 @@
+<h2>editer le livre {{book?.title}}</h2>
+<form (ngSubmit)="editBook()" #f="ngForm">
+    <div class="mb-3">
+        <label for="title" class="form-label">Titre*</label>
+        <input type="text" class="form-control" id="title" name="title" required ngModel #t="ngModel" [(ngModel)]="book!.title">
+        <span class="error" *ngIf="t.invalid && t.touched">
+            Ce champ est obligatoire!
+        </span>
+    </div>
+    <div class="mb-3">
+        <label for="author" class="form-label">Author*</label>
+        <input type="text" class="form-control" id="author" name="author" required ngModel #a="ngModel" [(ngModel)]="book!.author">
+        <span class="error" *ngIf="a.invalid && a.touched">
+            Ce champ est obligatoire!
+        </span>
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Prix*</label>
+        <input type="text" class="form-control" id="price" name="price" required ngModel #p="ngModel" [(ngModel)]="book!.price">
+        <span class="error" *ngIf="p.invalid && p.touched">
+            Ce champ est obligatoire!
+        </span>
+    </div>
+    <div class="mb-3">
+        <label for="cover" class="form-label">Couverture</label>
+        <input type="file" class="form-control" id="cover" name="cover" ngModel [(ngModel)]="book!.cover">
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" ngModel [(ngModel)]="book!.description">
+        </textarea>
+    </div>
+    
+    <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Valider</button>
+    <p>*:Champ obligatoire</p>
+  </form>
