@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class FooterComponent implements OnInit, OnDestroy {
   
-  books? : Book[];
+  books? : Book[] = [];
   suscriptionId? : Subscription
 
   constructor(private bookService : BookService){}
@@ -19,10 +19,17 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.books = this.bookService.getBooks();
-    this.bookService.bookDeleted.subscribe(
+    /*this.bookService.getBooks().subscribe(
+      {
+        next : books => this.books = books,
+        error : err => console.log(err),
+        complete : ()=>console.log("Chargement complet!")
+      }
+    );  */  
+    this.bookService.booksUpdated.subscribe(
       books => this.books = books
     )
+    this.bookService.getBooks();
   }
 
 

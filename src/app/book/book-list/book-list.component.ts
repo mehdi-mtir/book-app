@@ -20,13 +20,20 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit(): void {
-    this.books = this.bookService.getBooks();
-    this.subsciptionId = this.bookService.bookDeleted.subscribe(
+    /*this.bookService.getBooks().subscribe(
+      {
+        next : books => this.books = books,
+        error : err => console.log(err),
+        complete : ()=>console.log("Chargement complet!")
+      }
+    );*/
+    this.subsciptionId = this.bookService.booksUpdated.subscribe(
       books => this.books = books
     )
+    this.bookService.getBooks();
   }
 
-  deleteBook(id : number){
+  deleteBook(id : string){
     if(confirm("Êtes-vous sûre de vouloir supprimer le livre?")){
       this.bookService.deleteBook(id);
     }
